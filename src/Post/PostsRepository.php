@@ -30,11 +30,6 @@ class PostsRepository
         $statement->setFetchMode(PDO::FETCH_CLASS, "App\\Post\\PostModel");
         $post = $statement->fetch(PDO::FETCH_CLASS);
 
-        // $post = new PostModel();
-        // $post->id = $postArray['id'];
-        // $post->title = $postArray['title'];
-        // $post->content = $postArray['content'];
-
         return $post;
     }
 }
