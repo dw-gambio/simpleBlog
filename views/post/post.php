@@ -1,4 +1,6 @@
-<?php include __DIR__ . "/../layout/header.php"; ?>
+<?php 
+$title = "Post {$id}";
+include __DIR__ . "/../layout/header.php"; ?>
 
 <h1>Post.php</h1>
 

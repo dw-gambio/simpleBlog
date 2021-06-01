@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!--TODO: CREATE AN OBJECT THAT CREATES THE HEADER DEPENDENDANT ON TITLE GIVEN -->
-    <title>Blog</title>
+    <title><?php echo $title; ?></title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">

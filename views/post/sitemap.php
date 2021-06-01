@@ -1,4 +1,6 @@
-<?php include __DIR__ . "/../layout/header.php"; ?>
+<?php 
+$title = "Sitemap";
+include __DIR__ . "/../layout/header.php"; ?>
 
 <h1>Übersicht des Blogs</h1>
 <p class="lead">Das hier ist die Übersicht des Blogs.</p>
