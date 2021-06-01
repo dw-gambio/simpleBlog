@@ -1,5 +1,9 @@
 <?php
 include("./../init.php");
+
+$postsController = $container->make("postsController");
+$postsController->index();
+/*
 include("./elements/header.php");
 ?>
 
@@ -19,4 +23,4 @@ include("./elements/header.php");
   <?php endforeach; ?>
 </ul>
 
-<?php include("./elements/footer.php") ?>
+<?php include("./elements/footer.php") */?>
