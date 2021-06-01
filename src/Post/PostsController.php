@@ -24,4 +24,11 @@ class PostsController
 
         include __DIR__ . "/../../views/post/post.php";
     }
+
+    public function sitemap()
+    {
+        $posts = $this->postsRepository->fetchPosts();
+
+        include __DIR__ . "/../../views/post/sitemap.php";
+    }
 }
