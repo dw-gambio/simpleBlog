@@ -12,8 +12,8 @@ class PostsController
 
     public function index() 
     {
-        $res = $this->postsRepository->fetchPosts();
+        $posts = $this->postsRepository->fetchPosts();
 
-        echo "<h1>PostsController - index()</h1>";
+        include __DIR__ . "/../../views/post/index.php";
     }
 }
