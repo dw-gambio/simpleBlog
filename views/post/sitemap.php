@@ -1,5 +1,6 @@
-<?php 
-$title = "Sitemap";
+<?php
+$count = count($posts); 
+$title = "Sitemap {$count}";
 include __DIR__ . "/../layout/header.php"; ?>
 
 <h1>Übersicht des Blogs</h1>
