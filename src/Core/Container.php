@@ -5,6 +5,7 @@ namespace App\Core;
 use PDO;
 use App\Post\PostsRepository;
 use App\Post\PostsController;
+use PDOException;
 
 class Container 
 {
@@ -28,11 +29,18 @@ class Container
             },
             // Database connection
             'pdo' => function() {
-                $pdo = new PDO(
-                    "mysql:host=localhost;dbname=blog;charset=utf8",
-                    "blog", 
-                    "xj/b@zLI7!2974]8"
-                );    
+                try {
+                    $pdo = new PDO(
+                        "mysql:host=localhost;dbname=blog;charset=utf8",
+                        "blog", 
+                        "xj/b@zLI7!2974]8"
+                    );    
+                } catch (PDOException $e){
+                    echo "<h2>Failed to connect to database</h2></br>";
+                    echo "<h3><pre>{$e->getMessage()}</pre></h3>";
+                    die();
+                }
+                
                 $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
                 return $pdo;
             },
