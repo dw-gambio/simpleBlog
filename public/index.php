@@ -19,7 +19,7 @@ $routes = [
     ],
 ];
 
-// CATCH WRONG URL AND REDIRECT TO /INDEX
+// CATCH WRONG URL AND REDIRECT TO /index
 if(!isset($routes[$pathInfo])){
     $pathInfo = '/index';
 }
