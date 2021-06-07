@@ -1,7 +1,6 @@
 <?php 
 
 namespace App\Post;
-
 class PostsController 
 {
 
