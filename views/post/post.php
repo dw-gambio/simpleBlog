@@ -17,4 +17,12 @@ include __DIR__ . "/../layout/header.php"; ?>
     </div>
 </div>
 
+<ul class="list-group">
+    <?php foreach($comments AS $comment): ?>
+        <li class="list-group-item">
+            <?php echo $comment->content; ?>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
 <?php include __DIR__ . "/../layout/footer.php"; ?>

@@ -20,7 +20,8 @@ class Container
         $this->recipes = [
             'postsController' => function() {
                 return new PostsController(
-                    $this->make("postsRepository")
+                    $this->make("postsRepository"),
+                    $this->make('commentsRepository')
                 );
             },
             'postsRepository' => function() {
