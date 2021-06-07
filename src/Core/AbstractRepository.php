@@ -15,7 +15,6 @@ abstract class AbstractRepository
     }
 
     abstract public function getTableName();
-    
     abstract public function getModelName();
 
     function all()
