@@ -9,7 +9,7 @@ include __DIR__ . "/../layout/header.php"; ?>
 <ul>
 <?php foreach($posts as $post): ?>
     <li>
-        <a href="post.php?id=<?php echo ($post->id)?>">
+        <a href="post?id=<?php echo ($post->id)?>">
     <?php echo("[{$post->id}] {$post->title}"); ?>
         </a>
     </li>
