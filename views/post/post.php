@@ -25,4 +25,9 @@ include __DIR__ . "/../layout/header.php"; ?>
     <?php endforeach; ?>
 </ul>
 
+<form action="post?id=<?php echo $post['id'];?>" method="post">
+        <textarea name="content" class="form-control" style="margin-bottom:2rem;"></textarea>
+        <input type="submit" value="Add comment" class="btn btn-primary">
+</form>
+
 <?php include __DIR__ . "/../layout/footer.php"; ?>

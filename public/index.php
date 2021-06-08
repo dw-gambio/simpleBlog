@@ -15,7 +15,7 @@ $routes = [
     ],
     '/post' => [
         'controller' => 'postsController',
-        'method' => 'show'
+        'method' => 'post'
     ],
 ];
 
