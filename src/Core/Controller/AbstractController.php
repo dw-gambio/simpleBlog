@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Core;
+namespace App\Core\Controller;
 
 abstract class AbstractController 
 {
@@ -8,6 +8,6 @@ abstract class AbstractController
     protected function render($view, $params) 
     {
         extract($params);
-        include __DIR__ . "/../../views/{$view}.php";
+        include $view;
     }
 }

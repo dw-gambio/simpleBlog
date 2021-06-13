@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Post;
+namespace App\Post\Models;
 
-use App\Core\AbstractModel;
+use App\Core\Models\AbstractModel;
 
 class CommentModel extends AbstractModel
 {

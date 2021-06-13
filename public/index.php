@@ -1,30 +1,12 @@
-<?php 
+<?php
 
-require __DIR__ . "/../init.php";
+use App\Core\Application;
+use App\Core\Container;
 
-$pathInfo = $_SERVER['PATH_INFO'];
+require_once __DIR__ . '/../vendor/autoload.php';
 
-$routes = [
-    '/index' => [
-        'controller' => 'postsController',
-        'method' => 'index'
-    ],
-    '/sitemap' => [
-        'controller' => 'postsController',
-        'method' => 'sitemap'
-    ],
-    '/post' => [
-        'controller' => 'postsController',
-        'method' => 'post'
-    ],
-];
+ini_set('display_errors', '1');
+error_reporting(E_ALL & ~E_NOTICE & ~E_USER_NOTICE);
+@date_default_timezone_set('Europe/Berlin');
 
-// CATCH WRONG URL AND REDIRECT TO /index
-if(!isset($routes[$pathInfo])){
-    $pathInfo = '/index';
-}
-
-$route = $routes[$pathInfo];
-$controller = $container->make($route['controller']);
-$method = $route['method'];
-$controller->$method();
+Application::main(new Container());

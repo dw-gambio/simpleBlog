@@ -7,7 +7,6 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <!--TODO: CREATE AN OBJECT THAT CREATES THE HEADER DEPENDENDANT ON TITLE GIVEN -->
     <title><?php echo $title; ?></title>
 
     <!-- Latest compiled and minified CSS -->

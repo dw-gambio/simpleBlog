@@ -6,7 +6,9 @@
             "email": "michalak.josua@googlemail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "ext-pdo": "*"
+    },
     "autoload": {
         "psr-4": {
             "App\\": "src/"

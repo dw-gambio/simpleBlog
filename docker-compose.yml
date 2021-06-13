@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+    mysql:
+        image: 'mariadb:10'
+        container_name: db
+        ports:
+            - '3306:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: "root"
+            MYSQL_DATABASE: "blog"
+        networks:
+            - blog-network
+    server:
+        image: 'webdevops/php-apache-dev:7.4-alpine'
+        container_name: blog-server
+        ports:
+            - '8000:80'
+        environment:
+            - PHP_DISPLAY_ERRORS=1
+        tty: true
+        volumes:
+            - './:/app'
+        networks:
+            - blog-network
+networks:
+    blog-network:
+        driver: bridge
