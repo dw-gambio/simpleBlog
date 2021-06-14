@@ -1,7 +1,7 @@
 <?php 
 $title = "Post {$post->getId()->value()}";
 include __DIR__ . "/../../Core/Layout/header.php"; ?>
-<!--TODO: implement a Template-Engine-->
+<!--TODO: 2. implement a Template-Engine-->
 <h1>Post.php</h1>
 
 <div class="panel panel-default">

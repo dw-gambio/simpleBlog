@@ -21,7 +21,7 @@ class Application
         $dotenv = Dotenv::createImmutable(__DIR__ . "/../../");
         $dotenv->safeLoad();
 
-//      TODO: 2. implement better routing through .htaccess (slim?)
+//      TODO: 1. implement better routing through .htaccess (slim?)
         $routes = [
             '/index' => [
                 'controller' => PostController::class,

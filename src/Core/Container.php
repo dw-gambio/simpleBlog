@@ -15,7 +15,7 @@ use PDOException;
 
 class Container
 {
-// TODO: 4. exchange current container with prebuilt one https://container.thephpleague.com/
+// TODO: 3. exchange current container with prebuilt one https://container.thephpleague.com/
     /**
      * @var array
      */
@@ -60,8 +60,6 @@ class Container
             PostWriter::class => function () {
                 return new PostWriter($this->make(PDO::class));
             },
-            // Database connection
-            // TODO: 1. exclude DB data to .env file
             PDO::class => function () {
                 try {
                     $pdo = new PDO(
