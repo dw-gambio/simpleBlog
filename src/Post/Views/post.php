@@ -25,7 +25,7 @@ include __DIR__ . "/../../Core/Layout/header.php"; ?>
     <?php endforeach; ?>
 </ul>
 
-<form action="post?id=<?php echo $post->getId()->value();?>" method="post">
+<form action="post-<?php echo $post->getId()->value();?>" method="post">
         <textarea name="content" class="form-control" style="resize:none; margin-bottom:2rem;"></textarea>
         <input type="submit" value="Add comment" class="btn btn-primary">
 </form>
