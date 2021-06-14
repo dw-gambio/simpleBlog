@@ -4,8 +4,10 @@ namespace App\Post\Controller;
 
 use App\Core\Controller\AbstractController;
 use App\Post\Services\PostService;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
-// TODO: rework controller
+// TODO: 5. rework controller
 class PostController extends AbstractController
 {
 
@@ -20,24 +22,21 @@ class PostController extends AbstractController
         $this->postService = $postService;
     }
 
-    public function index(): void
+    public function index(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $posts = $this->postService->all();
 
         $this->render(__DIR__ . "/../Views/index.php", [
             'posts' => $posts
         ]);
+
+        return $response;
     }
 
 
-    public function post(): void
+    public function post(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $id = $_GET['id'];
-
-        if(isset($_POST['content'])) {
-            $content = $_POST['content'];
-            $this->postService->addCommentToPost($id, $content);
-        }
+        $id = $args['id'];
 
         $post = $this->postService->find($id);
         $comments = iterator_to_array($post->getComments());
@@ -47,14 +46,31 @@ class PostController extends AbstractController
             'post' => $post,
             'comments' => $comments
         ]);
+
+        return $response;
     }
 
-    public function sitemap(): void
+    public function addCommentToPost(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $id = $args['id'];
+
+        if(isset($_POST['content'])) {
+            $content = $_POST['content'];
+            $this->postService->addCommentToPost($id, $content);
+        }
+
+        return $response->withHeader('Location', './post-'. $id)->withStatus(302);
+    }
+
+    public function sitemap(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $posts = $this->postService->all();
 
         $this->render(__DIR__ . "/../Views/sitemap.php", [
             'posts' => $posts
         ]);
+
+
+        return $response;
     }
 }

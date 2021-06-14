@@ -6,6 +6,10 @@ namespace App\Core;
 
 use Dotenv\Dotenv;
 
+use Selective\BasePath\BasePathMiddleware;
+use Slim\Factory\AppFactory;
+
+
 use App\Post\Controller\PostController;
 
 /**
@@ -21,33 +25,53 @@ class Application
         $dotenv = Dotenv::createImmutable(__DIR__ . "/../../");
         $dotenv->safeLoad();
 
-//      TODO: 1. implement better routing through .htaccess (slim?)
-        $routes = [
-            '/index' => [
-                'controller' => PostController::class,
-                'method' => 'index',
-            ],
-            '/sitemap' => [
-                'controller' => PostController::class,
-                'method' => 'sitemap',
-            ],
-            '/post' => [
-                'controller' => PostController::class,
-                'method' => 'post',
-            ],
-        ];
+        $app = AppFactory::create();
+        $app->addRoutingMiddleware();
 
-        $pathInfo = $_SERVER['PATH_INFO'] ?? null;
+        // Set the base path to run the app in a subdirectory.
+        // This path is used in urlFor().
+        $app->add(new BasePathMiddleware($app));
 
-        // CATCH WRONG URL AND REDIRECT TO /index
-        if (!isset($routes[$pathInfo])) {
-            $pathInfo = '/index';
-        }
+        $app->addErrorMiddleware(true, true, true);
 
-        $route = $routes[$pathInfo];
-        $controller = $container->make($route['controller']);
+//        TODO: fix routing after implementing new container
+        $postController = $container->make(PostController::class);
+        // Define app routes
+        $app->get('/', [$postController, 'index']);
+        $app->get('/sitemap', [$postController, 'sitemap']);
+        $app->get('/post-{id}', [$postController, 'post']);
+        $app->post('/post-{id}', [$postController, 'addCommentToPost']);
 
-        $method = $route['method'];
-        $controller->$method();
+
+        $app->run();
+
+////      TODO: 1. implement better routing through .htaccess (slim?)
+//        $routes = [
+//            '/index' => [
+//                'controller' => PostController::class,
+//                'method' => 'index',
+//            ],
+//            '/sitemap' => [
+//                'controller' => PostController::class,
+//                'method' => 'sitemap',
+//            ],
+//            '/post' => [
+//                'controller' => PostController::class,
+//                'method' => 'post',
+//            ],
+//        ];
+//
+//        $pathInfo = $_SERVER['PATH_INFO'] ?? null;
+//
+//        // CATCH WRONG URL AND REDIRECT TO /index
+//        if (!isset($routes[$pathInfo])) {
+//            $pathInfo = '/index';
+//        }
+//
+//        $route = $routes[$pathInfo];
+//        $controller = $container->make($route['controller']);
+//
+//        $method = $route['method'];
+//        $controller->$method();
     }
 }
