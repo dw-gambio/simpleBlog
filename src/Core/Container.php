@@ -65,9 +65,11 @@ class Container
             PDO::class => function () {
                 try {
                     $pdo = new PDO(
-                        "mysql:host=localhost;dbname=blog",
-                        "root",
-                        "12345");
+                        "mysql:host={$_ENV['DB_HOST']};
+                        dbname={$_ENV['DB_NAME']}",
+                        $_ENV['DB_USERNAME'],
+                        $_ENV['DB_PASSWORD']
+                    );
                 } catch (PDOException $e) {
                     echo "<h2>Failed to connect to database</h2></br>";
                     echo "<h3><pre>{$e->getMessage()}</pre></h3>";
