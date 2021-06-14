@@ -39,6 +39,19 @@ class PostService
      */
     public function find(int $id): Post
     {
-        return $this->postRepository->find($this->postFactory->createId($id));
+        return $this->postRepository->find($this->postFactory->createPostId($id));
     }
+
+    /**
+     * @param int $postId
+     * @param string $content
+     */
+    public function addCommentToPost(int $postId, string $content): void
+    {
+        $this->postRepository->addCommentToPost(
+            $this->postFactory->createPostId($postId),
+            $this->postFactory->createContent($content)
+        );
+    }
+
 }

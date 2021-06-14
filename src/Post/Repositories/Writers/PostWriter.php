@@ -1,20 +1,19 @@
 <?php
 
 
-namespace App\Comment\Repositories\Writers;
+namespace App\Post\Repositories\Writers;
 
 
-use App\Comment\Models\ValueObjects\Content;
-use App\Comment\Models\ValueObjects\PostId;
+use App\Post\Models\ValueObjects\Content;
+use App\Post\Models\ValueObjects\PostId;
 use PDO;
 
-class CommentWriter
+class PostWriter
 {
     private PDO $pdo;
-    private const TABLE_NAME = "comments";
 
     /**
-     * CommentWriter constructor.
+     * PostWriter constructor.
      * @param PDO $pdo
      */
     public function __construct(PDO $pdo)
@@ -26,10 +25,10 @@ class CommentWriter
      * @param PostId $postId
      * @param Content $content
      */
-    public function addToPost(PostId $postId, Content $content): void
+    public function addCommentToPost(PostId $postId, Content $content): void
     {
         $statement = $this->pdo->prepare(
-            "INSERT INTO `" . self::TABLE_NAME . "` (`content`, `post_id`) VALUES (:content, :post_id)"
+            "INSERT INTO `comments` (`content`, `post_id`) VALUES (:content, :post_id)"
         );
         $statement->execute([
             'content' => $content->value(),

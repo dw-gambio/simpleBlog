@@ -1,30 +1,26 @@
 <?php
 
 
-namespace App\Comment\Models\Entities;
+namespace App\Post\Models\Entities;
 
 
-use App\Comment\Models\ValueObjects\CommentId;
-use App\Comment\Models\ValueObjects\Content;
-use App\Comment\Models\ValueObjects\PostId;
+use App\Post\Models\ValueObjects\CommentId;
+use App\Post\Models\ValueObjects\Content;
 
 class Comment
 {
     private CommentId $commentId;
     private Content $content;
-    private PostId $postId;
 
     /**
      * Comment constructor.
      * @param CommentId $commentId
      * @param Content $content
-     * @param PostId $postId
      */
-    public function __construct(CommentId $commentId, Content $content, PostId $postId)
+    public function __construct(CommentId $commentId, Content $content)
     {
         $this->commentId = $commentId;
         $this->content = $content;
-        $this->postId = $postId;
     }
 
     /**
@@ -41,14 +37,6 @@ class Comment
     public function getContent(): Content
     {
         return $this->content;
-    }
-
-    /**
-     * @return PostId
-     */
-    public function getPostId(): PostId
-    {
-        return $this->postId;
     }
 
 }

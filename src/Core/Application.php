@@ -15,7 +15,7 @@ class Application
 {
     public static function main(Container $container): void
     {
-//      TODO: implement better routing through .htaccess
+//      TODO: 2. implement better routing through .htaccess (slim?)
         $routes   = [
             '/index'   => [
                 'controller' => PostController::class,

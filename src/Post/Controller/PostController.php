@@ -2,27 +2,22 @@
 
 namespace App\Post\Controller;
 
-use App\Comment\Services\CommentService;
 use App\Core\Controller\AbstractController;
-use App\Post\Repositories\CommentsRepository;
-use App\Post\Repositories\PostsRepository;
 use App\Post\Services\PostService;
 
+// TODO: rework controller
 class PostController extends AbstractController
 {
 
     private PostService $postService;
-    private CommentService $commentService;
 
     /**
      * PostController constructor.
      * @param PostService $postService
-     * @param CommentService $commentService
      */
-    public function __construct(PostService $postService, CommentService $commentService)
+    public function __construct(PostService $postService)
     {
         $this->postService = $postService;
-        $this->commentService = $commentService;
     }
 
     public function index(): void
@@ -41,11 +36,11 @@ class PostController extends AbstractController
 
         if(isset($_POST['content'])) {
             $content = $_POST['content'];
-            $this->commentService->addToPost($id, $content);
+            $this->postService->addCommentToPost($id, $content);
         }
 
         $post = $this->postService->find($id);
-        $comments = $this->commentService->allFromPost($id);
+        $comments = iterator_to_array($post->getComments());
 
         $this->render(__DIR__ . "/../Views/post.php", [
             'id' => $id,

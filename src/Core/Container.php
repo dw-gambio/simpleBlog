@@ -1,24 +1,21 @@
 <?php
+
 namespace App\Core;
 
-use App\Comment\Repositories\CommentRepository;
-use App\Comment\Repositories\Factories\CommentFactory;
-use App\Comment\Repositories\Mappers\CommentMapper;
-use App\Comment\Repositories\Readers\CommentReader;
-use App\Comment\Repositories\Writers\CommentWriter;
-use App\Comment\Services\CommentService;
+
 use App\Post\Controller\PostController;
 use App\Post\Repositories\Factories\PostFactory;
 use App\Post\Repositories\Mappers\PostMapper;
 use App\Post\Repositories\PostRepository;
 use App\Post\Repositories\Readers\PostReader;
+use App\Post\Repositories\Writers\PostWriter;
 use App\Post\Services\PostService;
 use PDO;
 use PDOException;
 
 class Container
 {
-// TODO: exchange current container with prebuilt one
+// TODO: 4. exchange current container with prebuilt one https://container.thephpleague.com/
     /**
      * @var array
      */
@@ -35,8 +32,7 @@ class Container
         $this->recipes = [
             PostController::class => function () {
                 return new PostController(
-                    $this->make(PostService::class),
-                    $this->make(CommentService::class)
+                    $this->make(PostService::class)
                 );
             },
             PostService::class => function () {
@@ -46,7 +42,11 @@ class Container
                 );
             },
             PostRepository::class => function () {
-                return new PostRepository($this->make(PostReader::class), $this->make(PostMapper::class));
+                return new PostRepository(
+                    $this->make(PostReader::class),
+                    $this->make(PostWriter::class),
+                    $this->make(PostMapper::class)
+                );
             },
             PostMapper::class => function () {
                 return new PostMapper($this->make(PostFactory::class));
@@ -57,33 +57,11 @@ class Container
             PostReader::class => function () {
                 return new PostReader($this->make(PDO::class));
             },
-            CommentService::class => function () {
-                return new CommentService(
-                    $this->make(CommentRepository::class),
-                    $this->make(CommentFactory::class)
-                );
-            },
-            CommentRepository::class => function () {
-                return new CommentRepository(
-                    $this->make(CommentReader::class),
-                    $this->make(CommentWriter::class),
-                    $this->make(CommentMapper::class),
-                );
-            },
-            CommentMapper::class => function () {
-                return new CommentMapper($this->make(CommentFactory::class));
-            },
-            CommentFactory::class => function () {
-                return new CommentFactory();
-            },
-            CommentWriter::class => function () {
-                return new CommentWriter($this->make(PDO::class));
-            },
-            CommentReader::class => function () {
-                return new CommentReader($this->make(PDO::class));
+            PostWriter::class => function () {
+                return new PostWriter($this->make(PDO::class));
             },
             // Database connection
-            // TODO: exclude DB data to .env file
+            // TODO: 1. exclude DB data to .env file
             PDO::class => function () {
                 try {
                     $pdo = new PDO(

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Comment\Models\Collections;
+namespace App\Post\Models\Collections;
 
 
 use ArrayIterator;

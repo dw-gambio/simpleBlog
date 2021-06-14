@@ -1,15 +1,15 @@
 <?php
 
 
-namespace App\Comment\Models\ValueObjects;
+namespace App\Post\Models\ValueObjects;
 
 
-class PostId
+class CommentId
 {
     private int $value;
 
     /**
-     * PostId constructor.
+     * CommentId constructor.
      * @param int $value
      */
     public function __construct(int $value)
@@ -22,6 +22,6 @@ class PostId
      */
     public function value(): int
     {
-    return $this->value;
+        return $this->value;
     }
 }

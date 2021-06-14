@@ -10,7 +10,6 @@ use PDO;
 class PostReader
 {
     private PDO $pdo;
-    private const TABLE_NAME = "posts";
 
     /**
      * PostReader constructor.
@@ -26,21 +25,39 @@ class PostReader
      */
     public function all(): array
     {
-        $statement = $this->pdo->query("SELECT * FROM `" . self::TABLE_NAME . "`");
-
-        return $statement->fetchAll();
+        $statement = $this->pdo->query("SELECT * FROM `posts`");
+        $posts = $statement->fetchAll();
+        return array_map(function (array $post) {
+            return ['post' => $post, 'comments' => []];
+        }, $posts);
     }
-
 
     /**
      * @param PostId $id
-     * @return mixed
+     * @return array
      */
-    public function find(PostId $id)
+    public function find(PostId $id): array
     {
-        $statement = $this->pdo->prepare("SELECT * FROM `" . self::TABLE_NAME . "` WHERE id = :id");
+        $statement = $this->pdo->prepare("SELECT * FROM `posts` WHERE id = :id");
         $statement->execute(['id' => $id->value()]);
+        $post = $statement->fetch();
+        $comments = $this->getCommentsByPostId($id);
 
-        return $statement->fetch();
+        return [
+            "post" => $post,
+            "comments" => $comments
+        ];
+    }
+
+    /**
+     * @param PostId $postId
+     * @return array
+     */
+    private function getCommentsByPostId(PostId $postId): array
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM `comments` WHERE post_id = :post_id");
+        $statement->execute(['post_id' => $postId->value()]);
+
+        return $statement->fetchAll();
     }
 }
