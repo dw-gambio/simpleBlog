@@ -6,13 +6,7 @@ namespace App\Core;
 
 use Dotenv\Dotenv;
 
-use Psr\Http\Server\RequestHandlerInterface;
-use Slim\Exception\HttpNotFoundException;
-use Slim\Middleware\ErrorMiddleware;
-use Psr\Http\Message\ServerRequestInterface;
-
 use Slim\Factory\AppFactory;
-use Slim\Psr7\Response;
 
 
 /**
