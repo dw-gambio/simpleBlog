@@ -10,4 +10,5 @@ abstract class AbstractController
         extract($params);
         include $view;
     }
+
 }

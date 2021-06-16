@@ -7,7 +7,7 @@ use App\Post\Services\PostService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-// TODO: 5. rework controller
+// TODO: 3. rework controller
 class PostController extends AbstractController
 {
 
@@ -70,6 +70,13 @@ class PostController extends AbstractController
             'posts' => $posts
         ]);
 
+
+        return $response;
+    }
+
+    public function error(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $this->render(__DIR__ . "/../Views/error.php", []);
 
         return $response;
     }
