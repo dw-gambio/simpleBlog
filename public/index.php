@@ -10,5 +10,4 @@ error_reporting(E_ALL & ~E_NOTICE & ~E_USER_NOTICE);
 @date_default_timezone_set('Europe/Berlin');
 
 
-
 Application::main(new Container());
