@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Core;
 
 use Dotenv\Dotenv;
-
+use League\Container\Container;
 use Slim\Factory\AppFactory;
 
 
@@ -17,12 +17,17 @@ use Slim\Factory\AppFactory;
 class Application
 {
 
-    public static function main(Container $container): void
+    public static function main(): void
     {
+
         $dotenv = Dotenv::createImmutable(__DIR__ . "/../../");
         $dotenv->safeLoad();
 
-        $app = AppFactory::create();
+        $container = new Container();
+        $app = AppFactory::create(null, $container);
+
+        $buildRecipes = require __DIR__ . "/container.php";
+        $buildRecipes($container);
 
         $middleware = require __DIR__ . '/Middleware/middleware.php';
         $middleware($app);
