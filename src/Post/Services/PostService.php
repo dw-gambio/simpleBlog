@@ -48,9 +48,10 @@ class PostService
      */
     public function addCommentToPost(int $postId, string $content): void
     {
+        $content = trim($content);
+
         // CLOSE XSS VULNERABILITY
         $content = htmlentities($content, ENT_QUOTES, 'UTF-8');
-        // FIXME: Doesn't prevent posting just new lines
         if (!empty($content)) {
             $this->postRepository->addCommentToPost(
                 $this->postFactory->createPostId($postId),
