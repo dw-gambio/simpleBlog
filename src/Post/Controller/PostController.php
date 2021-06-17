@@ -36,14 +36,16 @@ class PostController extends AbstractController
     public function post(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $id = $args['id'];
-
         $post = $this->postService->find($id);
+
+        $postTitle = $post->getTitle()->value();
         $comments = iterator_to_array($post->getComments());
 
         return $this->render($response,"post", [
-            'title' => "Post",
-            'id' => $id,
-            'post' => $post,
+            'title' => "{$postTitle} - Post {$id}",
+            'postId' => $post->getId()->value(),
+            'postTitle' => $postTitle,
+            'postContent' => nl2br($post->getContent()->value()),
             'comments' => $comments
         ]);
 
@@ -64,10 +66,9 @@ class PostController extends AbstractController
     public function sitemap(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $posts = $this->postService->all();
-
+        $count = count(iterator_to_array($posts));
         return $this->render($response, "sitemap", [
-            'title' => "Sitemap",
-            'count' => count(iterator_to_array($posts)),
+            'title' => "Sitemap [{$count}]",
             'posts' => $posts
         ]);
     }

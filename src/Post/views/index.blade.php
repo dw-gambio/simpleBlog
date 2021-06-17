@@ -7,7 +7,6 @@
     <p class="lead">Das hier ist die Startseite des Blogs.</p>
 
     <ul>
-
         @foreach($posts as $post)
         <li>
             {{$post->getTitle()->value()}}

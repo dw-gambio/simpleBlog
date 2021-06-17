@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', "{$title} {$count}")
+@section('title', $title)
 
 @section('content')
     <h1>Übersicht des Blogs</h1>
