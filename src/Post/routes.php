@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Core\Container;
+use League\Container\Container;
 use App\Core\Middleware\TypeErrorMiddleware;
 use App\Post\Controller\PostController;
 use Selective\BasePath\BasePathMiddleware;
@@ -17,15 +17,15 @@ return function (App $app, Container $container) {
     $app->add(new BasePathMiddleware($app));
 
     // Define app routes
-    $app->get('/', [$container->make(PostController::class), 'index']);
-    $app->get('/sitemap', [$container->make(PostController::class), 'sitemap']);
-    $app->get('/post-{id}', [$container->make(PostController::class), 'post'])
+    $app->get('/',[PostController::class, 'index']);
+    $app->get('/sitemap', [PostController::class, 'sitemap']);
+    $app->get('/post-{id}', [PostController::class, 'post'])
         ->add(TypeErrorMiddleware::class);
-    $app->post('/post-{id}', [$container->make(PostController::class), 'addCommentToPost'])
+    $app->post('/post-{id}', [PostController::class, 'addCommentToPost'])
         ->add(TypeErrorMiddleware::class);
 
-    // Todo: 2.2. redo error handling with controller update
-    $app->get('/404', [$container->make(PostController::class), 'error']);
+    // Todo: 1.2. redo error handling with controller update
+    $app->get('/404', [PostController::class, 'error']);
 
 
 };
