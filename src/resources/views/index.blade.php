@@ -7,11 +7,12 @@
     <p class="lead">Das hier ist die Startseite des Blogs.</p>
 
     <ul>
-        <?php foreach($posts as $post): ?>
+
+        @foreach($posts as $post)
         <li>
-            <?php echo("{$post->getTitle()->value()}"); ?>
+            {{$post->getTitle()->value()}}
         </li>
-        <?php endforeach; ?>
+        @endforeach
     </ul>
 
 @endsection
