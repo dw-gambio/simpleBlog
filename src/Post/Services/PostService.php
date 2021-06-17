@@ -50,11 +50,12 @@ class PostService
     {
         // CLOSE XSS VULNERABILITY
         $content = htmlentities($content, ENT_QUOTES, 'UTF-8');
-
-        $this->postRepository->addCommentToPost(
-            $this->postFactory->createPostId($postId),
-            $this->postFactory->createContent($content)
-        );
+        if (!empty($content)) {
+            $this->postRepository->addCommentToPost(
+                $this->postFactory->createPostId($postId),
+                $this->postFactory->createContent($content)
+            );
+        }
     }
 
 }

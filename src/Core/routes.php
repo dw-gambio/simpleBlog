@@ -5,8 +5,11 @@ declare(strict_types=1);
 use App\Core\Container;
 use App\Core\Middleware\TypeErrorMiddleware;
 use App\Post\Controller\PostController;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 use Selective\BasePath\BasePathMiddleware;
 use Slim\App;
+use Jenssegers\Blade\Blade;
 
 return function (App $app, Container $container) {
 
@@ -26,5 +29,6 @@ return function (App $app, Container $container) {
 
     // Todo: 3.2. redo error handling with controller update
     $app->get('/404', [$container->make(PostController::class), 'error']);
+
 
 };
