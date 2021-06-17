@@ -27,7 +27,7 @@ class Application
         $middleware = require __DIR__ . '/Middleware/middleware.php';
         $middleware($app);
 
-        $routes = require __DIR__ . '/routes.php';
+        $routes = require __DIR__ . '/../Post/routes.php';
         $routes($app, $container);
 
         $app->run();

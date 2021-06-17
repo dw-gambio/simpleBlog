@@ -7,7 +7,7 @@ use App\Post\Services\PostService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-// TODO: 3. rework controller
+// TODO: 2. rework controller
 class PostController extends AbstractController
 {
 

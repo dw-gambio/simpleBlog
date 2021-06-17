@@ -13,7 +13,7 @@
             <ul class="nav navbar-nav">
                 <!--ADD NAVIGATION MENU ITEMS HERE -->
                 <li class="active"><a href="./">Home</a></li>
-                <li class="active"><a href="sitemap">Sitemap</a></li>
+                <li class="active"><a href="./sitemap">Sitemap</a></li>
             </ul>
         </div>
     </div>
