@@ -24,7 +24,14 @@ class TypeErrorMiddleware
                 return $handler->handle($request);
             } catch (TypeError $httpException) {
                 $response = (new Response());
-                $response->getBody()->write('invalid post id');
+                $response->getBody()->write("
+                    <html><head>
+                    <title>404 Not Found</title>
+                    </head><body>
+                    <h1>Not Found</h1>
+                    <p>The requested URL {$request->getUri()->getPath()} was not found on this server.</p>
+                    </body></html>
+                ");
 
                 return $response;
             }

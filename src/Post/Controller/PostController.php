@@ -54,12 +54,12 @@ class PostController extends AbstractController
     {
         $id = $args['id'];
 
-        if(isset($_POST['content'])) {
+        if (isset($_POST['content'])) {
             $content = $_POST['content'];
             $this->postService->addCommentToPost($id, $content);
         }
 
-        return $response->withHeader('Location', './post-'. $id)->withStatus(302);
+        return $response->withHeader('Location', './post-' . $id)->withStatus(302);
     }
 
     public function sitemap(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -76,6 +76,7 @@ class PostController extends AbstractController
 
     public function error(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
+
         $this->render(__DIR__ . "/../Views/error.php", []);
 
         return $response;
