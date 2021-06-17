@@ -26,11 +26,10 @@ class PostController extends AbstractController
     {
         $posts = $this->postService->all();
 
-        $this->render(__DIR__ . "/../Views/index.php", [
+        return $this->render($response, "index", [
+            'title' => "Startseite",
             'posts' => $posts
         ]);
-
-        return $response;
     }
 
 
@@ -41,13 +40,13 @@ class PostController extends AbstractController
         $post = $this->postService->find($id);
         $comments = iterator_to_array($post->getComments());
 
-        $this->render(__DIR__ . "/../Views/post.php", [
+        return $this->render($response,"post", [
+            'title' => "Post",
             'id' => $id,
             'post' => $post,
             'comments' => $comments
         ]);
 
-        return $response;
     }
 
     public function addCommentToPost(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -66,19 +65,17 @@ class PostController extends AbstractController
     {
         $posts = $this->postService->all();
 
-        $this->render(__DIR__ . "/../Views/sitemap.php", [
+        return $this->render($response, "sitemap", [
+            'title' => "Sitemap",
+            'count' => count(iterator_to_array($posts)),
             'posts' => $posts
         ]);
-
-
-        return $response;
     }
 
     public function error(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-
-        $this->render(__DIR__ . "/../Views/error.php", []);
-
-        return $response;
+        return $this->render($response, "error", [
+            'title' => "Error - 404"
+        ]);
     }
 }
