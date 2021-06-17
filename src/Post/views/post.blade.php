@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', "{$title} {$id}")
+@section('title', "{$post->getTitle()->value()} - {$title} {$id}")
 
 @section('content')
     <h1>Post.php</h1>
