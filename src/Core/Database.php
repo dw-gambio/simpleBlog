@@ -25,8 +25,8 @@ class Database extends PDO
                 $dbPassword);
 
         } catch (PDOException $e) {
-            echo "<h2>Failed to connect to database</h2></br>";
-            echo "<h3><pre>{$e->getMessage()}</pre></h3>";
+            echo "Failed to connect to database";
+            echo "{$e->getMessage()}";
             die();
         }
 
